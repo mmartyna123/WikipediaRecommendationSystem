@@ -3,3 +3,4 @@ scikit-learn
 nltk
 beautifulsoup4
 requests
+webbrowser
