@@ -7,15 +7,10 @@ from recommender.expansion import expandDatabase
 
 
 
-def recommendArticles(
-    history: List[str],
-    df: pd.DataFrame,
-    tokenizer,
-    stemmer=None,
-    lemmatizer=None,
-    useLemmatizer: bool = False,
-    top_n: int = 5
-) -> pd.DataFrame:
+def recommendArticles(history: List[str], df: pd.DataFrame, tokenizer, stemmer=None, lemmatizer=None, useLemmatizer: bool = False,
+    top_n: int = 5, explanation_terms: int = None) -> pd.DataFrame:
+    
+    
     if df.index.name != 'title':
         df = df.set_index('title')
 
@@ -40,5 +35,20 @@ def recommendArticles(
 
     recommendations = recommendations[~recommendations['title'].isin(matched_history)]
     recommendations = recommendations.sort_values(by='similarity', ascending=False).reset_index(drop=True)
+    recommendations = recommendations.head(top_n)
+    
+    feature_names = tfidf.get_feature_names_out()
+    if explanation_terms == 0:
+        recommendations['explanation'] = ["(no explanation)"] * len(recommendations)
+    else:
+        explanations = []
+        for _, row in recommendations.iterrows():
+            vector = dfTFIDF.loc[row['title']].values
+            top_indices = np.argsort(vector)[-explanation_terms:][::-1]
+            terms = [feature_names[i] for i in top_indices]
+            explanations.append(", ".join(terms))
+        recommendations['explanation'] = explanations
+
+
 
     return recommendations.head(top_n)
