@@ -3,4 +3,7 @@ scikit-learn
 nltk
 beautifulsoup4
 requests
-webbrowser
+matplotlib
+ttkbootstrap
+numpy
+scipy
