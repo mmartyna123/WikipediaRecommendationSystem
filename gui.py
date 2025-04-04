@@ -135,7 +135,7 @@ class RecommenderGUI:
                 self.output.tag_config(f"link{index}", foreground="blue", underline=True)
                 self.output.tag_bind(f"link{index}", "<Button-1>", lambda e, url=url: webbrowser.open(url))
 
-            # --- Embedded plot ---
+          
             self.show_plot(recs)
 
 

@@ -42,14 +42,14 @@ def additionalArticles(newArticle, df, tokenizer, stemmer=None, lemmatizer=None,
         return []
     
     # expansionNumber = random.randint(5, maxExpansion)
-    # we perform the crawling to get some meaningful and somehow connected articles to the unknown one from the user's history
+    
     newCrawledArticles = crawlArticles(mainArticle['link'], max_articles=maxExpansion)
     
     processedNewArticles=[]
     for article in newCrawledArticles:
         if article['title'] not in df.index:
             # row = pd.Series({"content": article['content']})
-            # we preprocess the content of the new articles same way as the df!
+            
             article['processedContent'] = preprocessArticles(article['content'], tokenizer, stemmer, 
                                                           lemmatizer, useLemmatizer)
             processedNewArticles.append(article)
@@ -80,7 +80,7 @@ def expandDatabase(history, df, tokenizer, stemmer=None, lemmatizer=None, useLem
         
     print(f"Number of articles in the database after expansion: {len(df)}")
     
-    # ✅ Return df and updated list of history titles that actually exist now
+    # Filter available titles based on the original history
     available_titles = [title for title in history if title in df.index]
     return df, available_titles
 

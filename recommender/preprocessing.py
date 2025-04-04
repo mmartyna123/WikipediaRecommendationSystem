@@ -3,10 +3,6 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, wordpunct_tokenize
 from nltk.stem import PorterStemmer, LancasterStemmer, WordNetLemmatizer
 
-# Download only if needed
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
 
 stopWords = set(stopwords.words('english'))
 

@@ -14,7 +14,7 @@ def recommendArticles(history: List[str], df: pd.DataFrame, tokenizer, stemmer=N
     if df.index.name != 'title':
         df = df.set_index('title')
 
-    # ✅ Expand database and filter valid history titles
+
     df, matched_history = expandDatabase(history, df, tokenizer, stemmer, lemmatizer, useLemmatizer)
 
     if not matched_history:

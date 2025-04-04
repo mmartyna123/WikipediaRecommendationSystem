@@ -43,9 +43,3 @@ def crawlArticles(start_url, max_articles):
             pass
         
     return articles
-
-
-#function that we previosly used all throug the code but we have changed approach but since it is still used we left it here :)
-def saveDatabase(df, fileName):
-    df.to_csv(fileName, index=False)
-    return None
