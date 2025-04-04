@@ -1,11 +1,15 @@
 import tkinter as tk
 from gui import RecommenderGUI
 import nltk
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('omw-1.4')  # ← optional but good for lemmatizer
-nltk.download('punkt_tab')  # ← fix for your issue
+# Automatically download necessary NLTK data if not already downloaded
+nltk_packages = ['punkt', 'stopwords', 'wordnet']
+
+for pkg in nltk_packages:
+    try:
+        nltk.data.find(f'tokenizers/{pkg}' if pkg == 'punkt' else f'corpora/{pkg}')
+    except LookupError:
+        nltk.download(pkg)
+
 
 
 
