@@ -138,8 +138,7 @@ class RecommenderGUI:
             # --- Embedded plot ---
             self.show_plot(recs)
 
-            # Switch to plot tab
-            self.notebook.select(self.tab_plot)
+
 
         except Exception as e:
             messagebox.showerror("Error", f"Something went wrong:\n{e}")
