@@ -6,11 +6,12 @@ nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('omw-1.4')  # ← optional but good for lemmatizer
 nltk.download('punkt_tab')  # ← fix for your issue
-import ttkbootstrap as tb
+
 
 
 if __name__ == "__main__":
-    root = tb.Window(themename="cosmo")
+    root = tk.Tk()
     app = RecommenderGUI(root)
-    root.mainloop()
     root.protocol("WM_DELETE_WINDOW", root.destroy)
+    root.mainloop()
+    
