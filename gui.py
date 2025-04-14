@@ -64,20 +64,30 @@ class RecommenderGUI:
         self.output.tag_config("explain", foreground="gray")
 
     def build_settings_tab(self):
-        # Stemmer
+        tb.Label(self.tab_settings, text="⚙️ Preprocessing Settings", font=("Helvetica", 14, "bold")).pack(pady=(10, 20))
+
+        # Stemmer Section
+        stemmer_frame = tb.Labelframe(self.tab_settings, text="Stemmer", padding=10, bootstyle="secondary")
+        stemmer_frame.pack(fill="x", padx=20, pady=10)
+
         self.stemmer_var = tk.StringVar(value="porter")
-        tb.Label(self.tab_settings, text="Select stemmer:", font=("Helvetica", 11)).pack(pady=10)
         for stemmer in ["porter", "lancaster", "none"]:
-            tb.Radiobutton(self.tab_settings, text=stemmer.capitalize(), variable=self.stemmer_var, value=stemmer).pack()
+            tb.Radiobutton(stemmer_frame, text=stemmer.capitalize(), variable=self.stemmer_var, value=stemmer).pack(anchor="w", padx=10, pady=2)
 
-        # Tokenizer
+        # Tokenizer Section
+        tokenizer_frame = tb.Labelframe(self.tab_settings, text="Tokenizer", padding=10, bootstyle="secondary")
+        tokenizer_frame.pack(fill="x", padx=20, pady=10)
+
         self.tokenizer_var = tk.StringVar(value="word_tokenize")
-        tb.Label(self.tab_settings, text="Select tokenizer:", font=("Helvetica", 11)).pack(pady=10)
-        tb.OptionMenu(self.tab_settings, self.tokenizer_var, "word_tokenize", "wordpunct_tokenize").pack()
+        tb.OptionMenu(tokenizer_frame, self.tokenizer_var, "word_tokenize", "wordpunct_tokenize").pack(padx=10, pady=5)
 
-        # Lemmatizer
+        # Lemmatizer Section
+        lemmatizer_frame = tb.Labelframe(self.tab_settings, text="Lemmatizer", padding=10, bootstyle="secondary")
+        lemmatizer_frame.pack(fill="x", padx=20, pady=10)
+
         self.use_lemmatizer_var = tk.BooleanVar()
-        tb.Checkbutton(self.tab_settings, text="Use lemmatizer instead of stemmer", variable=self.use_lemmatizer_var).pack(pady=15)
+        tb.Checkbutton(lemmatizer_frame, text="Use lemmatizer instead of stemmer", variable=self.use_lemmatizer_var).pack(anchor="w", padx=10, pady=5)
+
 
     def build_plot_tab(self):
         self.plot_frame = tb.Frame(self.tab_plot)
